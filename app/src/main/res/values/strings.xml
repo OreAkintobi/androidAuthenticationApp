@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MVVM</string>
+    <string name="password">password</string>
+    <string name="email">email</string>
+    <string name="mvvm">MVVM</string>
+    <string name="architect_your_app_with">architect your app with</string>
+    <string name="sign_in">Sign In</string>
+    <string name="forget_password">Forget Password?</string>
+</resources>
