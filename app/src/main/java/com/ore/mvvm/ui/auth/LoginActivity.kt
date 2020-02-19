@@ -10,6 +10,7 @@ import com.ore.mvvm.R
 import com.ore.mvvm.data.db.AppDatabase
 import com.ore.mvvm.data.db.entities.User
 import com.ore.mvvm.data.network.MyApi
+import com.ore.mvvm.data.network.NetworkConnectionInterceptor
 import com.ore.mvvm.data.repositories.UserRepository
 import com.ore.mvvm.databinding.ActivityLoginBinding
 import com.ore.mvvm.ui.home.HomeActivity
@@ -23,7 +24,9 @@ class LoginActivity : AppCompatActivity(), AuthListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val api = MyApi()
+        val networkConnectionInterceptor = NetworkConnectionInterceptor(this)
+        // NetworkConnectionInterceptor needs to be passed into MyApi function
+        val api = MyApi(networkConnectionInterceptor)
         val database = AppDatabase(this)
         val repository = UserRepository(api, database)
         val factory = AuthViewModelFactory(repository)
