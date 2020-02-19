@@ -7,31 +7,27 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ore.mvvm.R
-import com.ore.mvvm.data.db.AppDatabase
 import com.ore.mvvm.data.db.entities.User
-import com.ore.mvvm.data.network.MyApi
-import com.ore.mvvm.data.network.NetworkConnectionInterceptor
-import com.ore.mvvm.data.repositories.UserRepository
 import com.ore.mvvm.databinding.ActivityLoginBinding
 import com.ore.mvvm.ui.home.HomeActivity
 import com.ore.mvvm.utils.hide
 import com.ore.mvvm.utils.show
 import com.ore.mvvm.utils.snackbar
 import kotlinx.android.synthetic.main.activity_login.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
 // AuthListener is implemented along with AppCompat to add callback functions onStarted, onSuccess & onFailure
 // AuthListener is also used in the AuthViewModel so that the data entered is able to be validated for callback functions to work
-class LoginActivity : AppCompatActivity(), AuthListener {
+class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
+
+    // implementing dependency injection from MyApplication class
+    override val kodein by kodein()
+    private val factory: AuthViewModelFactory by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val networkConnectionInterceptor = NetworkConnectionInterceptor(this)
-        // NetworkConnectionInterceptor needs to be passed into MyApi function
-        val api = MyApi(networkConnectionInterceptor)
-        val database = AppDatabase(this)
-        val repository = UserRepository(api, database)
-        val factory = AuthViewModelFactory(repository)
 
         // Get automatically-generated Binding Instance to set activity content view
         val binding: ActivityLoginBinding =

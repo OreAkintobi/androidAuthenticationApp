@@ -29,6 +29,16 @@ interface MyApi {
         // Now defines a Retrofit Response that takes in  data that is of type AuthResponse from our data class AuthResponse
     ): Response<AuthResponse>
 
+
+    // create function for signup that will be called from UserRepository
+    @FormUrlEncoded
+    @POST("signup")
+    suspend fun userSignup(
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): Response<AuthResponse>
+
     //
     companion object {
         // this operator function (function that overloads operators) allows us to call/"invoke" the Api when needed

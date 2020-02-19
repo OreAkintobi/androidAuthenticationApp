@@ -21,6 +21,10 @@ class UserRepository(
         return apiRequest { api.userLogin(email, password) }
     }
 
+    suspend fun userSignup(name: String, email: String, password: String): AuthResponse {
+        return apiRequest { api.userSignup(name, email, password) }
+    }
+
     // this function saves the user in the local database. Can only be performed asynchronously
     suspend fun saveUser(user: User) {
         database.getUserDao().upsert(

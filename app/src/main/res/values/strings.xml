@@ -5,5 +5,7 @@
     <string name="mvvm">MVVM</string>
     <string name="architect_your_app_with">architect your app with</string>
     <string name="sign_in">Sign In</string>
-    <string name="forget_password">Forget Password?</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="forget_password">Forgot Password?</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
